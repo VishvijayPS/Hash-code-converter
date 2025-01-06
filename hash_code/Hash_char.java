@@ -6,22 +6,22 @@ public class Hash_char{
         try (Scanner sc = new Scanner(System.in)) {
             Hash_char hs = new Hash_char();
             
-            System.out.println("Enter the sentance :");
+            System.out.print("Enter the sentance :");
             String s = sc.nextLine();
             
             char [] arr = s.toCharArray();
             int [] hash = new int[arr.length];
             
             for(int i = 0;i < arr.length;i++){
-                int res = hs.gethash(arr[i]);
+                int res = hs.gethash(arr[i],hs);
                 hash[i] = res;
             }
             for(int i = 0;i < hash.length;i++){
                 System.out.print(""+hash[i]);
             }
         }
-}
-        public int gethash(char ch){
+    }
+        public int gethash(char ch,Hash_char hs){
             char [] alpha_l = {'a' ,'b'  ,'c'  ,'d'  ,'e'  ,'f'  ,'g'  ,'h'  ,'i'  ,'j'  ,'k'  ,'l'  ,'m'  ,'n'  ,'o'  ,'p'  ,'q'  ,'r'  ,'s'  ,'t'  ,'u'  ,'v'  ,'w'  ,'x'  ,'y'  ,'z'};
             int [] alpha_ln = {997 , 995 , 993 , 991 , 989 , 987 , 985 , 983 , 981 , 979 , 977 , 975 , 973 , 971 , 969 , 967 , 965 , 963 , 961 , 959 , 957 , 955 , 953 , 951 , 949 , 947};
 
@@ -35,27 +35,18 @@ public class Hash_char{
             int [] numbn = {123 , 126 , 129 , 132 , 135 , 138 , 141 , 144 , 147 , 150};
             
             if(Character.isUpperCase(ch)){
-                for (int i = 0;i < alpha_h.length; i++) {
-                    if(ch == alpha_h[i]){
-                        return alpha_hn[i];
-                    }
-                }
+                int enc = hs.value(alpha_h,ch);
+                return alpha_hn[enc];
             }
         
             else if(Character.isLowerCase(ch)){
-                for (int i = 0;i < alpha_l.length; i++) {
-                    if(ch == alpha_l[i]){
-                        return alpha_ln[i];
-                    }
-                }
+                int enc = hs.value(alpha_l,ch);
+                return alpha_ln[enc];
             }
         
             else if(Character.isDigit(ch)){
-                for (int i = 0;i < numb.length; i++) {
-                    if(ch == numb[i]){
-                        return numbn[i];
-                    }
-                }
+                int enc = hs.value(numb,ch);
+                return numbn[enc];
             }
         
             else if(Character.isWhitespace(ch)){
@@ -63,13 +54,30 @@ public class Hash_char{
             }
 
             else{
-                for (int i = 0;i < char_sp.length; i++) {
-                    if(ch == char_sp[i]){
-                        return char_spn[i];
-                    }
-                }
+                int enc = hs.value(char_sp,ch);
+                return char_spn[enc];
             }
         
-            return 0;
         }
+
+        public int value(char [] array, char target) {
+            int left = 0;
+            int right = array.length - 1;
+            
+            while (left <= right) {
+                int mid = left + (right - left) / 2;
+                
+                if (array[mid] == target) {
+                    return mid;
+                }
+                
+                if (array[mid] < target) {
+                    left = mid + 1;
+                } else {
+                    right = mid - 1;
+                }
+            }
+            return 1;
+        }
+    
 }
