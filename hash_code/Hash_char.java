@@ -36,16 +36,19 @@ public class Hash_char{
             
             if(Character.isUpperCase(ch)){
                 int enc = hs.value(alpha_h,ch);
+                // System.out.println("index : " +enc);
                 return alpha_hn[enc];
             }
         
             else if(Character.isLowerCase(ch)){
                 int enc = hs.value(alpha_l,ch);
+                // System.out.println("index : " +enc);
                 return alpha_ln[enc];
             }
         
             else if(Character.isDigit(ch)){
                 int enc = hs.value(numb,ch);
+                // System.out.println("index : " +enc);
                 return numbn[enc];
             }
         
@@ -55,29 +58,19 @@ public class Hash_char{
 
             else{
                 int enc = hs.value(char_sp,ch);
+                // System.out.println("index : " +enc);
                 return char_spn[enc];
             }
         
         }
 
         public int value(char [] array, char target) {
-            int left = 0;
-            int right = array.length - 1;
-            
-            while (left <= right) {
-                int mid = left + (right - left) / 2;
-                
-                if (array[mid] == target) {
-                    return mid;
-                }
-                
-                if (array[mid] < target) {
-                    left = mid + 1;
-                } else {
-                    right = mid - 1;
+            for (int i = 0;i < array.length; i++) {
+                if(target == array[i]){
+                    return i;
                 }
             }
-            return 1;
+            return 0;
         }
     
 }
