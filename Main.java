@@ -14,7 +14,7 @@ public class Main {
 
             String hashedString = convertAndLoadToString(input, hs, randomChars, random);
 
-            System.out.println("Hashed String with Random Delimiters:");
+            System.out.println("KeyQuill hash value :");
             System.out.println(hashedString);
         }
     }
@@ -42,7 +42,7 @@ public class Main {
         return result.toString();
     }
 
-    public static void addRandomCharacters(StringBuffer result, char[] randomChars, int numChars,Random random) {
+    public static void addRandomCharacters(StringBuilder result, char[] randomChars, int numChars, Random random) {
         for (int i = 0; i < numChars; i++) {
             char randomChar = randomChars[random.nextInt(randomChars.length)];
             result.append(randomChar);
