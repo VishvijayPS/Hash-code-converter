@@ -7,7 +7,7 @@ public class Main {
         try (Scanner sc = new Scanner(System.in)) {
             Hash_char hs = new Hash_char();
             Random random = new Random();
-            char[] randomChars = {'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U','v', 'w', 'x', 'y', 'z','j', 'k', 'l', 'm','@','#','$','&'};
+            char[] randomChars = {'w', 'O', '£', 'z', 'R', 'S', 'l', 'U','v', 'N', 'x', 'y', 'Q','j', 'k', 'T', 'm','@','P','$','&'};
 
             System.out.print("Enter the sentence: ");
             String input = sc.nextLine();
