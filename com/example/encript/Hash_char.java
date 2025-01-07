@@ -1,4 +1,3 @@
-// Save this file as com/example/encript/Hash_char.java
 package com.example.encript;
 
 public class Hash_char {
