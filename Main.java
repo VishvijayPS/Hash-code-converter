@@ -7,26 +7,45 @@ public class Main {
         try (Scanner sc = new Scanner(System.in)) {
             Hash_char hs = new Hash_char();
             Random random = new Random();
-            char[] randomChars = {'@', '#', '$', '%', '&', '*'};
-            
+            char[] randomChars = {'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U','v', 'w', 'x', 'y', 'z','j', 'k', 'l', 'm','@','#','$','&'};
+
             System.out.print("Enter the sentence: ");
-            String s = sc.nextLine();
-            
-            char[] arr = s.toCharArray();
-            int[] hash = new int[arr.length];
-            
-            for (int i = 0; i < arr.length; i++) {
-                int res = hs.gethash(arr[i]);
-                hash[i] = res;
+            String input = sc.nextLine();
+
+            String hashedString = convertAndLoadToString(input, hs, randomChars, random);
+
+            System.out.println("Hashed String with Random Delimiters:");
+            System.out.println(hashedString);
+        }
+    }
+
+    public static String convertAndLoadToString(String input, Hash_char hashCharHandler, char[] randomChars, Random random) {
+        char[] arr = input.toCharArray();
+        int lt = arr.length;
+        StringBuilder result = new StringBuilder();
+        String hlt = Integer.toHexString(lt);
+        result.append(hlt);
+        if (result.length() < 4) {
+            addRandomCharacters(result, randomChars, 4 - result.length(),random);
+        }
+        for (int i = 0; i < arr.length; i++) {
+            int hashValue = hashCharHandler.gethash(arr[i]);
+            String hexadecimal = Integer.toHexString(hashValue * lt);
+            result.append(hexadecimal);
+
+            if (i < arr.length - 1) {
+                char randomChar = randomChars[random.nextInt(randomChars.length)];
+                result.append(randomChar);
             }
-            
-            for (int i = 0; i < hash.length; i++) {
-                System.out.print(hash[i]);
-                if (i < hash.length - 1) {
-                    char randomChar = randomChars[random.nextInt(randomChars.length)];
-                    System.out.print(randomChar);
-                }
-            }
+        }
+
+        return result.toString();
+    }
+
+    public static void addRandomCharacters(StringBuffer result, char[] randomChars, int numChars,Random random) {
+        for (int i = 0; i < numChars; i++) {
+            char randomChar = randomChars[random.nextInt(randomChars.length)];
+            result.append(randomChar);
         }
     }
 }
